@@ -79,11 +79,31 @@ export default function App() {
         body: JSON.stringify({ images: payloadImages }),
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      let data: any;
+
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const rawText = await res.text();
+        if (res.status === 404) {
+          throw new Error(
+            "Rota /api/extract-questions não encontrada (404 na Vercel). Certifique-se de que o arquivo api/extract-questions.ts e vercel.json estão no seu repositório."
+          );
+        } else if (res.status === 413) {
+          throw new Error(
+            "Tamanho das imagens excedeu o limite da Vercel (4.5MB). Tente enviar menos fotos de cada vez."
+          );
+        } else {
+          throw new Error(
+            `Erro no servidor (${res.status}): ${rawText.slice(0, 150)}...`
+          );
+        }
+      }
 
       if (!res.ok || !data.success) {
         throw new Error(
-          data.error || "Não foi possível extrair as questões das imagens."
+          data?.error || "Não foi possível extrair as questões das imagens."
         );
       }
 

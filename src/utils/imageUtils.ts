@@ -6,8 +6,8 @@ import { CapturedPhoto } from "../types";
  */
 export async function optimizeImage(
   dataUrl: string,
-  maxDimension = 1600,
-  quality = 0.85
+  maxDimension = 1280,
+  quality = 0.8
 ): Promise<{ dataUrl: string; mimeType: string }> {
   return new Promise((resolve) => {
     const img = new Image();
