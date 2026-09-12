@@ -1,0 +1,6 @@
+{
+  "name": "Digitalizador de Questões",
+  "description": "Digitalize fotos de perguntas, sintetize e ordene as questões formatadas para copiar e salve fotos e texto diretamente no dispositivo.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
