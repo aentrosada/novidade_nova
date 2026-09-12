@@ -107,8 +107,8 @@ REGRAS:
         parts: [...imageParts, { text: promptText }],
       };
 
-      // Call Gemini 3.8 Flash or Gemini 2.5 Flash
-      const modelName = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+      // Call Gemini model
+      const modelName = process.env.GEMINI_MODEL || "gemini-3.6-flash";
       const response = await ai.models.generateContent({
         model: modelName,
         contents,
